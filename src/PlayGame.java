@@ -1,6 +1,4 @@
 
-import java.io.ObjectInputStream;
-import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,7 +18,7 @@ public class PlayGame {
 
     Boolean keepPlaying = true;
 
-    private static ArrayList <String> board = new ArrayList<>();
+    private static ArrayList<String> board = new ArrayList<String>();
 
 
     public PlayGame(){
@@ -48,9 +46,7 @@ public class PlayGame {
             players.add(new Player(name, letter, i));
         }
 
-        for (int i = 0; i < 10; i++) {
-            board.add(" ");
-        }
+        Board.createBoard();
 
         return players;
     }
