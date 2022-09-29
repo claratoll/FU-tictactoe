@@ -11,6 +11,7 @@ enum Turn {
 public class PlayGame {
 
     private static ArrayList<Player> players = new ArrayList<Player>();
+    private static ArrayList<String> board = new ArrayList<String>();
 
     Player player;
 
@@ -18,14 +19,12 @@ public class PlayGame {
 
     Boolean keepPlaying = true;
 
-    private static ArrayList<String> board = new ArrayList<String>();
-
 
     public PlayGame(){
         initialize();
 
         rules();
-        printBoard();
+        printBoard(keepPlaying);
 
         turn = Turn.values()[new Random().nextInt(Turn.values().length)];
 
@@ -46,7 +45,9 @@ public class PlayGame {
             players.add(new Player(name, letter, i));
         }
 
-        Board.createBoard();
+        for (int i = 0; i < 10; i++) {
+            board.add(" ");
+        }
 
         return players;
     }
@@ -87,11 +88,9 @@ public class PlayGame {
                 board.set(8, player.getLetter());
             }
 
-        checkIfWinner(player.getLetter());
+            checkIfWinner(player.getLetter());
+            printBoard(keepPlaying);
 
-            if (keepPlaying){
-                printBoard();
-            }
 
         turn = player.getId() == 0 ? Turn.Player2 : Turn.Player;
 
@@ -106,36 +105,36 @@ public class PlayGame {
     private void checkIfWinner(String letter) {
 
         for (int a = 0; a < 8; a++) {
-            String line = null;
+            String winnerLine = null;
 
             switch (a) {
                 case 0:
-                    line = board.get(0) + board.get(1) + board.get(2);
+                    winnerLine = board.get(0) + board.get(1) + board.get(2);
                     break;
                 case 1:
-                    line = board.get(3) + board.get(4) + board.get(5);
+                    winnerLine = board.get(3) + board.get(4) + board.get(5);
                     break;
                 case 2:
-                    line = board.get(6) + board.get(7) + board.get(8);
+                    winnerLine = board.get(6) + board.get(7) + board.get(8);
                     break;
                 case 3:
-                    line = board.get(0) + board.get(3) + board.get(6);
+                    winnerLine = board.get(0) + board.get(3) + board.get(6);
                     break;
                 case 4:
-                    line = board.get(1) + board.get(4) + board.get(7);
+                    winnerLine = board.get(1) + board.get(4) + board.get(7);
                     break;
                 case 5:
-                    line = board.get(2) + board.get(5) + board.get(8);
+                    winnerLine = board.get(2) + board.get(5) + board.get(8);
                     break;
                 case 6:
-                    line = board.get(0) + board.get(4) + board.get(8);
+                    winnerLine = board.get(0) + board.get(4) + board.get(8);
                     break;
                 case 7:
-                    line = board.get(2) + board.get(4) + board.get(6);
+                    winnerLine = board.get(2) + board.get(4) + board.get(6);
                     break;
             }
 
-            if (line.equals(letter + letter + letter)){
+            if (winnerLine.equals(letter + letter + letter)){
                 System.out.println("WE HAVE A WINNER! ");
                 keepPlaying = false;
                 break;
@@ -143,8 +142,13 @@ public class PlayGame {
         }
     }
 
-    private static void printBoard(){
-        System.out.println("Current board:");
+    private static void printBoard(boolean keepPlaying){
+        if (keepPlaying){
+            System.out.println("Current board:");
+        } else {
+            System.out.println("WINNER BOARD");
+        }
+
         System.out.println(" " + board.get(0) + " | " + board.get(1) + " | " + board.get(2));
         System.out.println("---+---+---");
         System.out.println(" " + board.get(3) + " | " + board.get(4) + " | " + board.get(5));
