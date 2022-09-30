@@ -7,6 +7,13 @@ public class Player {
     private String name;
     private int wins;
     private int id;
+    private String winner;
+
+
+    public String getWinner() {
+        return winner;
+    }
+
 
     public String getLetter() {
         return letter;
@@ -35,6 +42,6 @@ public class Player {
 
     public void increaseScore() {
         wins++;
-        System.out.println(wins);
+        System.out.println(name + "won with "+ wins + "wins!");
     }
 }
