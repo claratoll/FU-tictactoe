@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ public class Game {
 
 
     private Turn turn = null;
+    Player player;
 
     Boolean startGame = true;
     Boolean booleanPlayGame = true;
@@ -23,13 +25,18 @@ public class Game {
 
 
     public Game() {
+        //the actual game method
+
         createPlayers();
 
+        //checks if the game should run or quit
         while (keepPlaying) {
+            //checks if there should be new players
             if (startGame) {
                 createBoard();
                 startGame = false;
             }
+
 
             printBoard(booleanPlayGame);
 
@@ -77,6 +84,17 @@ public class Game {
 
     }
 
+  /*  boolean placeMarker (int place, char marker){
+        if ( ledig ){
+            board[place - 1] = marker;
+            return true;
+        }
+
+        return false
+    }
+*/
+
+
     private static void createBoard() {
       //  try {
        //     Scanner sc = new Scanner(System.in);
@@ -98,19 +116,26 @@ public class Game {
     public void Play() {
         while (booleanPlayGame) {
 
-            Player player = turn == Turn.Player ? players.get(0) : players.get(1);
+            player = turn == Turn.Player ? players.get(0) : players.get(1);
 
 
-            // while true - loopa spelarna
+            // while true - players choose which place they want to put their mark
             try {
                 System.out.println(player.getName() + " choose a spot - write a number between 1 and 9");
                 Scanner sc = new Scanner(System.in);
                 int inputNumber = sc.nextInt();
 
-                if (inputNumber < 1 || inputNumber > 9) {
+                //checks if input is between 1-9 & if the place is free
+                while (inputNumber < 1 || inputNumber > 9 || !Objects.equals(board.get(inputNumber -1), " ")) {
                     System.out.println("Invalid input; re-enter your number");
                     inputNumber = sc.nextInt();
                 }
+
+           /*     while (!Objects.equals(board.get(inputNumber -1), " ") ){
+                    System.out.println("Place already taken, choose another place.");
+                    inputNumber = sc.nextInt();
+                }*/
+
 
                 if (1 == inputNumber) {
                     board.set(0, player.getLetter());
@@ -136,14 +161,14 @@ public class Game {
                 printBoard(booleanPlayGame);
 
 
-                turn = player.getId() == 0 ? Turn.Player2 : Turn.Player;
+               // turn = player.getId() == 0 ? Turn.Player2 : Turn.Player;
 
 
-     /*   if (player.getId() == 0) {
-            turn = Turn.Player2;
-        } else {
-            turn = Turn.Player;
-        }*/
+                if (player.getId() == 0) {
+                    turn = Turn.Player2;
+                } else {
+                    turn = Turn.Player;
+                }
 
 
             } catch (Exception e) {
@@ -152,6 +177,7 @@ public class Game {
         }
 
     }
+
 
     private void checkIfWinner(String letter) {
 
@@ -187,7 +213,7 @@ public class Game {
 
             if (winnerLine.equals(letter + letter + letter)) {
                 System.out.println("WE HAVE A WINNER! ");
-                //     player.increaseScore();
+                player.increaseScore();
                 booleanPlayGame = false;
                 break;
             }
@@ -197,16 +223,11 @@ public class Game {
     private static void printBoard(boolean keepPlaying) {
         if (keepPlaying) {
             System.out.println("Current board:");
-        } else {
-            System.out.println("WINNER BOARD");
+            System.out.println(" " + board.get(0) + " | " + board.get(1) + " | " + board.get(2));
+            System.out.println("---+---+---");
+            System.out.println(" " + board.get(3) + " | " + board.get(4) + " | " + board.get(5));
+            System.out.println("---+---+---");
+            System.out.println(" " + board.get(6) + " | " + board.get(7) + " | " + board.get(8));
         }
-
-        System.out.println(" " + board.get(0) + " | " + board.get(1) + " | " + board.get(2));
-        System.out.println("---+---+---");
-        System.out.println(" " + board.get(3) + " | " + board.get(4) + " | " + board.get(5));
-        System.out.println("---+---+---");
-        System.out.println(" " + board.get(6) + " | " + board.get(7) + " | " + board.get(8));
     }
-
-
 }

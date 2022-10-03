@@ -4,8 +4,8 @@ public class Player {
     //class
     //AI
 
-    private String name;
-    private int wins;
+    private static String name;
+    private static int wins;
     private int id;
     private String winner;
 
@@ -40,8 +40,8 @@ public class Player {
     }
 
 
-    public void increaseScore() {
+    public static void increaseScore() {
         wins++;
-        System.out.println(name + "won with "+ wins + "wins!");
+        System.out.println(name + " won with "+ wins + " wins!");
     }
 }
