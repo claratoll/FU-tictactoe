@@ -12,7 +12,7 @@ enum Turn {
 public class Game {
 
     private static ArrayList<Player> players = new ArrayList<Player>();
-    private static ArrayList<String> board = new ArrayList<String>();
+    private static ArrayList<Board> board = new ArrayList<>();
 
 
     private Turn turn = null;
@@ -25,6 +25,7 @@ public class Game {
 
 
     public Game() {
+
         //the actual game method
 
         createPlayers();
@@ -33,7 +34,19 @@ public class Game {
         while (keepPlaying) {
             //checks if there should be new players
             if (startGame) {
-                createBoard();
+                System.out.println("Choose the size of the board game; 2x2, 3x3, 4x4 etc. \nWrite the number of how big your board should be:");
+                Scanner sc = new Scanner(System.in);
+                int size = sc.nextInt();
+                try {
+                    if (1 <= size){
+                        System.out.println("Board could not be created, please write a number larger than 1");
+                        size = sc.nextInt();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input; try again.");
+                }
+                //varför ska det inte vara board med litet b?
+                Board.createBoard(size);
                 startGame = false;
             }
 
@@ -53,7 +66,7 @@ public class Game {
                     booleanPlayGame = true;
 
                     board.clear();
-                    createBoard();
+                   // createBoard();
                     Play();
 
                 } else {
@@ -107,9 +120,9 @@ public class Game {
        //     System.out.println("Invalid input; try again.");
      //   }
 
-        for (int i = 0; i < 10; i++) {
-            board.add(" ");
-        }
+      //  for (int i = 0; i < 10; i++) {
+      //      board.add(" ");
+     //   }
     }
 
 
@@ -135,7 +148,7 @@ public class Game {
                     System.out.println("Place already taken, choose another place.");
                     inputNumber = sc.nextInt();
                 }*/
-
+/*
 
                 if (1 == inputNumber) {
                     board.set(0, player.getLetter());
@@ -156,8 +169,8 @@ public class Game {
                 } else if (9 == inputNumber) {
                     board.set(8, player.getLetter());
                 }
-
-                checkIfWinner(player.getLetter());
+*/
+                checkIfWinner(player.getLetter().toString());
                 printBoard(booleanPlayGame);
 
 
@@ -181,7 +194,7 @@ public class Game {
 
     private void checkIfWinner(String letter) {
 
-        for (int a = 0; a < 8; a++) {
+   /*     for (int a = 0; a < 8; a++) {
             String winnerLine = null;
 
             switch (a) {
@@ -218,6 +231,8 @@ public class Game {
                 break;
             }
         }
+
+    */
     }
 
     private static void printBoard(boolean keepPlaying) {

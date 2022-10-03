@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Board {
+    private static Board[][] board;
 
    // private static int N;
   //  private static int x = 1;
@@ -11,10 +12,10 @@ public class Board {
 
     private static int size;
 
-    private String board;
+   // private String board;
 
     public Board(String board) {
-        this.board = board;
+       // this.board = board;
     }
 
     /*public String[][] getBoard() {
@@ -22,23 +23,24 @@ public class Board {
     }
 */
 
+    public Board (){
+        Board[][] board1 = board;
+    }
     public Board(int size, String board) {
         this.size = size;
-        this.board = board;
+      //  this.board = board;
     }
 
 
-    public static void createBoard() {
-        System.out.println("Choose the size of the board game; 2x2, 3x3, 4x4 etc. \nWrite the number of how big your board should be:");
-        Scanner sc = new Scanner(System.in);
-        try {
-            size = sc.nextInt();
-            if (1 <= size){
-                System.out.println("Board could not be created, please write a number larger than 1");
-                size = sc.nextInt();
+    public static int createBoard(int size) {
+    //    this.board =
+        Board[][] boards = new Board[size][size];
+        //  this.size = size;
+
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                board[row][col] = new Board();
             }
-        } catch (Exception e) {
-            System.out.println("Invalid input; try again.");
         }
 
         //måste göra en reset här
@@ -53,19 +55,21 @@ public class Board {
         }*/
 
         //create board
-        for (int i = 0; i < size; i++) {
+    //    for (int i = 0; i < size; i++) {
             //  board.add(" ");
 
-        }
+    //    }
+
+        return size;
     }
     //här ska allt gällande skapandet av boarden ligga
 
     private static void printBoard(boolean keepPlaying) {
 
-      /*  for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 System.out.print("[" + board[i][j] + "]" + " ");
-            }*/
+            }
 
             if (keepPlaying) {
                 System.out.println("Current board:");
@@ -81,6 +85,6 @@ public class Board {
             // System.out.println(" " + board.get(6) + " | " + board.get(7) + " | " + board.get(8));
         }
 
-    }
 
-}
+
+}}

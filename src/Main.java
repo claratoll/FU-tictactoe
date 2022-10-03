@@ -8,7 +8,7 @@ public class Main {
 
         Board board = new Board(" x");
     //    board.getBoard();
-        board.createBoard();
+        Board.createBoard(6);
 
        // new Game();
 

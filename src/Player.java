@@ -8,6 +8,7 @@ public class Player {
     private static int wins;
     private int id;
     private String winner;
+    private String letter;
 
 
     public String getWinner() {
@@ -19,7 +20,6 @@ public class Player {
         return letter;
     }
 
-    private String letter;
 
     public int getId() {
         return id;
