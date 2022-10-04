@@ -45,7 +45,7 @@ public class Player {
     }
 
 
-    public static void increaseScore() {
+    public void increaseScore() {
         wins++;
         System.out.println(name + " won with "+ wins + " wins!");
     }
