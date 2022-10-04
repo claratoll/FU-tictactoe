@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Board {
 
     //här borde det vara en kod som tar emot hur stor boarden ska vara i size
@@ -10,32 +7,32 @@ public class Board {
 
     private static int size;
 
-    private static Board[][] board = new Board[size][size];
+   // private static Board[][] board = new Board[size][size];
 
    // private static int N;
   //  private static int x = 1;
-  //  public static String[][] board = new String[size][size];
+    public static String[][] createBoard = new String[size][size];
 
     private String tile;
 
 
-   // private String board;
+    private String board;
 
     public Board(String board) {
        // this.board = board;
     }
 
-    /*public String[][] getBoard() {
+    public String getBoard() {
         return board;
     }
-*/
 
-    public Board (){
-        Board[][] board1 = board;
-    }
+
+    //public Board (){
+   //     Board[][] board1 = board;
+  //  }
     public Board(int size, String board) {
         this.size = size;
-      //  this.board = board;
+        this.board = board;
     }
 
 
@@ -46,7 +43,7 @@ public class Board {
 
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                board[row][col] = new Board();
+              //  board[row][col] = new Board();
             }
         }
 
@@ -72,7 +69,7 @@ public class Board {
     //här ska allt gällande skapandet av boarden ligga
 
     private static void printBoard(boolean keepPlaying) {
-
+/*
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 System.out.print("[" + board[i][j] + "]" + " ");
@@ -83,7 +80,7 @@ public class Board {
             } else {
                 System.out.println("WINNER BOARD");
             }
-
+*/
 
             // System.out.println(" " + board.get(0) + " | " + board.get(1) + " | " + board.get(2));
             // System.out.println("---+---+---");
@@ -94,4 +91,4 @@ public class Board {
 
 
 
-}}
+}

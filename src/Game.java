@@ -12,9 +12,8 @@ enum Turn {
 public class Game {
 
     private static ArrayList<Player> players = new ArrayList<Player>();
-    private static ArrayList<Board> board = new ArrayList<>();
+    private static ArrayList<String> board = new ArrayList<String>();
 
-    Computer computer = new Computer("Computer", "X", 1);
 
 
     private Turn turn = null;
@@ -36,17 +35,7 @@ public class Game {
         while (keepPlaying) {
             //checks if there should be new players
             if (startGame) {
-                System.out.println("Choose the size of the board game; 2x2, 3x3, 4x4 etc. \nWrite the number of how big your board should be:");
-                Scanner sc = new Scanner(System.in);
-                int size = sc.nextInt();
-                try {
-                    if (1 <= size){
-                        System.out.println("Board could not be created, please write a number larger than 1");
-                        size = sc.nextInt();
-                    }
-                } catch (Exception e) {
-                    System.out.println("Invalid input; try again.");
-                }
+               createBoard();
                 //varför ska det inte vara board med litet b?
               //  board.createBoard(size);
                 startGame = false;
@@ -85,9 +74,18 @@ public class Game {
 
     public static ArrayList<Player> createPlayers() {
         //create players
-        Scanner sc = new Scanner(System.in);
-        int playerNum = 2;
+        int playerNum;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Do you want to play against a computer or with friends?\n If Friends, write '1', if Computer, write '2'");
+        int playChoice = scan.nextInt();
+        if (playChoice == 2){
+            playerNum = 1;
+            Computer computer = new Computer("Computer", "X", 1);
+        } else {
+            playerNum = 2;
+        }
 
+        Scanner sc = new Scanner(System.in);
         for (int i = 0; i < playerNum; i++) {
             System.out.println("Player " + (i + 1) + ", please write your name");
             String name = sc.nextLine();
@@ -111,16 +109,28 @@ public class Game {
 
 
     private static void createBoard() {
-      //  try {
-       //     Scanner sc = new Scanner(System.in);
-        //    System.out.println("How many tiles do you want to play with");
-       //     int size = sc.nextInt();
+         board.clear();
 
-          //  board.add(size, " ");
 
-     //   }catch (Exception e){
-       //     System.out.println("Invalid input; try again.");
-     //   }
+        System.out.println("Choose the size of the board game; 2x2, 3x3, 4x4 etc. \nWrite the number of how big your board should be:");
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        try {
+            if (1 >= size){
+                System.out.println("Board could not be created, please write a number larger than 1");
+                size = sc.nextInt();
+            } else {
+                System.out.println("Creating board with " + size + " x " + size);
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input; try again.");
+        }
+
+
+
+            board.add(size, " ");
+
+
 
       //  for (int i = 0; i < 10; i++) {
       //      board.add(" ");
@@ -240,11 +250,23 @@ public class Game {
     private static void printBoard(boolean keepPlaying) {
         if (keepPlaying) {
             System.out.println("Current board:");
-            System.out.println(" " + board.get(0) + " | " + board.get(1) + " | " + board.get(2));
+
+            //loopa igenom size
+
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board.length; j++) {
+                    board[i][j] = "" + (x);
+                    x++;
+                    System.out.println("hejj");
+                }
+           /* System.out.println(" " + board.get(0) + " | " + board.get(1) + " | " + board.get(2));
             System.out.println("---+---+---");
             System.out.println(" " + board.get(3) + " | " + board.get(4) + " | " + board.get(5));
             System.out.println("---+---+---");
             System.out.println(" " + board.get(6) + " | " + board.get(7) + " | " + board.get(8));
+
+       */
+
         }
     }
 }
