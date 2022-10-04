@@ -14,6 +14,8 @@ public class Game {
     private static ArrayList<Player> players = new ArrayList<Player>();
     private static ArrayList<Board> board = new ArrayList<>();
 
+    Computer computer = new Computer("Computer", "X", 1);
+
 
     private Turn turn = null;
     Player player;
@@ -46,7 +48,7 @@ public class Game {
                     System.out.println("Invalid input; try again.");
                 }
                 //varför ska det inte vara board med litet b?
-                Board.createBoard(size);
+              //  board.createBoard(size);
                 startGame = false;
             }
 

@@ -2,7 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Board {
-    private static Board[][] board;
+
+    //här borde det vara en kod som tar emot hur stor boarden ska vara i size
+    //skapa en board med kolumn och rader utefter size
+    //uppdatera boarden varje gång någon fyller i vad det ska vara
+    //loopa för att hitta vinnare
+
+    private static int size;
+
+    private static Board[][] board = new Board[size][size];
 
    // private static int N;
   //  private static int x = 1;
@@ -10,7 +18,6 @@ public class Board {
 
     private String tile;
 
-    private static int size;
 
    // private String board;
 

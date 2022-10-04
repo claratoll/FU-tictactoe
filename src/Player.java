@@ -11,6 +11,11 @@ public class Player {
     private String letter;
 
 
+    public void setLetter(String letter) {
+        this.letter = letter;
+    }
+
+
     public String getWinner() {
         return winner;
     }
