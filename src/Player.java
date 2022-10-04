@@ -1,9 +1,5 @@
 public class Player {
 
-
-    //class
-    //AI
-
     private static String name;
     private static int wins;
     private int id;

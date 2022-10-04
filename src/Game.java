@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,7 +17,6 @@ public class Game {
     private Turn turn = null;
     Player player;
 
-    Boolean startGame = true;
     Boolean booleanPlayGame = true;
     Boolean keepPlaying = true;
 
@@ -27,17 +25,10 @@ public class Game {
         //the actual game method
 
         createPlayers();
+        createBoard();
 
         //checks if the game should run or quit
         while (keepPlaying) {
-            //checks if there should be new players
-            if (startGame) {
-                createBoard();
-                startGame = false;
-            }
-
-
-            printBoard(booleanPlayGame);
 
             turn = Turn.values()[new Random().nextInt(Turn.values().length)];
 
@@ -49,12 +40,7 @@ public class Game {
             try {
                 String answer = sc.nextLine();
                 if (answer.equals("yes")) {
-                    booleanPlayGame = true;
-
-                    board.clear();
-                    createBoard();
                     Play();
-
                 } else {
                     System.out.println("Thank you for playing!");
                     keepPlaying = false;
@@ -96,27 +82,31 @@ public class Game {
 
 
     public void Play() {
-        while (booleanPlayGame) {
             player = turn == Turn.Player ? players.get(0) : players.get(1);
 
             // while true - players choose which place they want to put their mark
             try {
                 System.out.println(player.getName() + " choose a spot - write a number between 1 and 9");
                 Scanner sc = new Scanner(System.in);
-                int inputNumber = sc.nextInt();
-
-                //checks if input is between 1-9 & if the place is free
-                /*while (inputNumber < 1 || inputNumber > 9 || !Objects.equals(board.get(inputNumber - 1), " ")) {
-                    System.out.println("Invalid input; re-enter your number");
-                    inputNumber = sc.nextInt();
-                }*/
+                int rowNumber = sc.nextInt() - 1;
+                System.out.println(player.getName() + ", choose a col ");
+                int colNumber = sc.nextInt() - 1;
 
 
+                if (board.markSpot(rowNumber, colNumber, player.getLetter())) {
+                    // Only change turn if we were able to take the spot
+                    turn = turn == Turn.Player ? Turn.Player2 : Turn.Player;
+                } else {
+                    System.out.println("This spot is taken.");
+                }
 
-        /*    } catch (Exception e) {
+                board.printBoard();
+
+
+           } catch (Exception e) {
                 System.out.println("Invalid input; try again.");
-            }*/
-        }
+            }
+
 
     }
 
