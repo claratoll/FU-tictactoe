@@ -38,7 +38,7 @@ public class Game {
             String name = sc.nextLine();
             System.out.println(name + ", please write your letter you want to play with");
             String letter = sc.nextLine();
-            players.add(new Player(name, letter, i));
+            players.add(new Player(name, letter));
         }
 
         } catch (Exception e) {
@@ -49,6 +49,7 @@ public class Game {
 
 
     private void createBoard() {
+        //create how big board the users want and send it to Board to create a board.
         try {
             Scanner sc = new Scanner(System.in);
             System.out.println("How big do you want the board? 2x2, 3x3, 4x4 etc. Please write a number");
@@ -71,31 +72,37 @@ public class Game {
 
             System.out.println("Do you want to play again? yes or no");
             Scanner sc = new Scanner(System.in);
-            try {
+
+            while (true) {
                 String answer = sc.nextLine();
                 if (answer.equals("yes")) {
                     //Creating new board
                     createBoard();
+                    break;
 
-                } else {
+                } else if (answer.equals("no")) {
                     System.out.println("Thank you for playing!");
                     keepPlaying = false;
+
+                    //check if there is an all-time winner
                     allTimeWinner();
+                    break;
+                } else {
+                    System.out.println("Please write yes or no.");
                 }
-            } catch (Exception e) {
-                System.out.println("Please write 'yes' or 'no'");
             }
+
         }
     }
 
     public void play() {
         while (booleanPlayGame) {
-            int rowNumber = 0;
-            int colNumber = 0;
+            int rowNumber;
+            int colNumber;
 
             player = turn == Turn.Player ? players.get(0) : players.get(1);
 
-            // while true - players choose which place they want to put their mark
+            // while booleanPlayGame true - players choose which place they want to put their mark
             try {
                 System.out.println(player.getName() + " choose a spot - write a number between 1 and 9");
                 Scanner sc = new Scanner(System.in);
@@ -112,11 +119,11 @@ public class Game {
 
                 board.printBoard();
 
+                //if booleanPLayGame returns false - player earns a "win" and game breaks
                 if (!board.checkWinner(rowNumber, colNumber, player.getLetter(), booleanPlayGame)){
                     player.increaseScore();
                     break;
                 }
-
 
             } catch (Exception e) {
                 System.out.println("Invalid input; try again.");
@@ -125,15 +132,20 @@ public class Game {
     }
 
     public void allTimeWinner(){
-    //    player = turn == Turn.Player ? players.get(0) : players.get(1);
+        //collecting wins for each player
+        int winPlayer1 = players.get(0).getWins();
+        int winPlayer2 = players.get(1).getWins();
 
-        if (players.get(0).getWins() < players.get(1).getWins()){
-            player.setWinner(player.getName());
+        //if else to check if there is a tie or which of the players that wins
+        if (winPlayer1 > winPlayer2){
+            player.setWinner(players.get(0).getName());
+            System.out.println(player.getWinner() + " is the winner with  " + winPlayer1 + " wins!");
+        } else if (winPlayer1 == winPlayer2){
+            System.out.println("It's a tie!");
         } else {
-            player.setWinner(player.getName());
+            player.setWinner(players.get(1).getName());
+            System.out.println(player.getWinner() + " is the winner with  " + winPlayer2 + " wins!");
         }
-
-        System.out.println(player.getWinner() + " is the winner with  " + player.getWins() + " wins!");
     }
 }
 

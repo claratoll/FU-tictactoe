@@ -30,21 +30,11 @@ public class Board {
             board[row][col] = letter;
             return true;
         }
-
         return false;
-    }
-
-    public String[][] getBoard() {
-        return board;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public Boolean checkWinner(int row, int col, String letter, Boolean booleanPlayGame){
         int countMove = 0;
-
 
         //check col
         for(int i = 0; i < size; i++){
@@ -56,6 +46,7 @@ public class Board {
             }
         }
 
+        //to check if it's a draw the moves are saved in countMove
         countMove++;
 
         //check row
@@ -68,10 +59,8 @@ public class Board {
             }
         }
 
-
-        //check diag
+        //check diagonal
         if(row == col){
-            //we're on a diagonal
             for(int i = 0; i < size; i++){
                 if(board[i][i] != letter)
                     break;
@@ -93,13 +82,12 @@ public class Board {
                 }
             }
         }
+
         //check draw
         if(countMove == (Math.pow(size, 2) - 1)){
             System.out.println("Draw! No Winners");
         }
 
         return booleanPlayGame;
-
     }
-
 }

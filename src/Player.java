@@ -12,45 +12,26 @@ public class Player {
         return wins;
     }
 
-    public void setLetter(String letter) {
-        this.letter = letter;
-    }
-
-
     public void setWinner(String winner) {
         this.winner = winner;
     }
 
-
     public String getWinner() {
-        //this.winner = name;
         return winner;
     }
-
 
     public String getLetter() {
         return letter;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public Player(String name, String letter, int id) {
+    public Player(String name, String letter) {
         this.name = name;
         this.letter = letter;
-        this.id = id;
-    }
-
-    public Player(String name) {
-        this.name = name;
     }
 
     public String getName() {
         return name;
     }
-
 
     public void increaseScore() {
         wins++;
