@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Board {
     private String[][] board;
 
@@ -43,4 +41,65 @@ public class Board {
     public int getSize() {
         return size;
     }
+
+    public Boolean checkWinner(int row, int col, String letter, Boolean booleanPlayGame){
+        int countMove = 0;
+
+
+        //check col
+        for(int i = 0; i < size; i++){
+            if(board[i][col] != letter)
+                break;
+            if(i == size-1){
+                System.out.println("Col win");
+                booleanPlayGame = false;
+            }
+        }
+
+        countMove++;
+
+        //check row
+        for(int i = 0; i < size; i++){
+            if(board[row][i] != letter)
+                break;
+            if(i == size-1){
+                System.out.println("row win");
+                booleanPlayGame = false;
+            }
+        }
+
+
+        //check diag
+        if(row == col){
+            //we're on a diagonal
+            for(int i = 0; i < size; i++){
+                if(board[i][i] != letter)
+                    break;
+                if(i == size-1){
+                    System.out.println("Diagonal win");
+                    booleanPlayGame = false;
+                }
+            }
+        }
+
+        //check anti diagonal
+        if(row + col == size - 1){
+            for(int i = 0; i < size; i++){
+                if(board[i][(size-1)-i] != letter)
+                    break;
+                if(i == size-1){
+                    System.out.println("anti diagonal win");
+                    booleanPlayGame = false;
+                }
+            }
+        }
+        //check draw
+        if(countMove == (Math.pow(size, 2) - 1)){
+            System.out.println("Draw! No Winners");
+        }
+
+        return booleanPlayGame;
+
+    }
+
 }

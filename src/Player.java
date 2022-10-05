@@ -3,16 +3,27 @@ public class Player {
     private static String name;
     private static int wins;
     private int id;
+
+
     private String winner;
     private String letter;
 
+    public int getWins() {
+        return wins;
+    }
 
     public void setLetter(String letter) {
         this.letter = letter;
     }
 
 
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+
     public String getWinner() {
+        //this.winner = name;
         return winner;
     }
 
